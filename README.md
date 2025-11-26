@@ -1,5 +1,5 @@
-AI Course Prerequisite Validator
-Build Status License Docs
+# AI Course Prerequisite Validator
+
 A market‑relevant SaaS that converts college course catalogs into a graph model, validates prerequisite logic, and delivers actionable insights to registrars, curriculum committees, advisors, and students. The validator finds structural issues such as circular prerequisites, hidden requirements, bottlenecks, and overly long prerequisite chains, and exposes them through reports, exports, and an interactive dashboard.
 
 Table of Contents
@@ -19,7 +19,7 @@ Table of Contents
 - Getting Started and Contribution
 - License
 
-Project Overview
+## 🚀 Overview
 Purpose
 Turn static course catalogs into an auditable directed graph and apply graph algorithms to validate curriculum structure, surface errors, and recommend remediation. The product reduces catalog errors, improves student planning, and helps institutions allocate resources more effectively.
 Primary users
@@ -60,17 +60,18 @@ Data Model Summary
 - Program: program_id, name, required_courses[], electives[]
 - PrereqExpression: raw_text, expression_tree (AND/OR nodes), resolved_course_ids[]
 - GraphEdge: from_course, to_course, edge_type (prereq/coreq/recommended)
-API Examples
+
+## 🌐 API Examples
+### Ingest a Catalog
 POST /ingest/catalog
 Content-Type: application/json
-
 {
   "source_url": "https://catalog.university.edu/courses",
   "format": "html",
   "program_id": "CS-BS"
 }
 
-
+### Retrieve Issues
 GET /programs/{program_id}/issues
 Response 200 OK
 [
@@ -90,10 +91,11 @@ Response 200 OK
   "dependents": ["CS201", "ENGR210"]
 }
 
+---
 
+## 🏗 Architecture
 
-Architecture and Technology Stack
-High Level Architecture
+### High‑Level Components
 - Ingestion Layer: scrapers, PDF extractor, API connectors, parsing pipeline
 - Processing Layer: parser/NLP → normalizer → graph builder
 - Analysis Layer: validation engine running graph algorithms and heuristics
@@ -101,34 +103,63 @@ High Level Architecture
 - API Layer: REST service exposing ingestion, job status, and analysis results
 - UI Layer: React dashboard with interactive graph visualization
 - Worker Queue: asynchronous job processing for heavy analyses and scheduled re‑runs
-Recommended Technologies
-- Backend: Python with FastAPI for rapid prototyping and production readiness
-- Graph Processing: NetworkX for prototype; Neo4j or TigerGraph for production scale if needed
-- NLP Parsing: rule‑based regex plus lightweight transformer models for ambiguous text
-- Frontend: React with Cytoscape.js or D3 for interactive graph visualization
-- Async Jobs: Celery + Redis or cloud queue (AWS SQS)
-- Database: PostgreSQL; object store S3 for snapshots
-- Auth: SAML/OAuth for institutional SSO
-- Deployment: Docker + Kubernetes or managed cloud services
-Design Principles
-- Idempotent ingestion with raw snapshot retention
-- Explainability with human‑readable rationale for each flagged issue
-- Extensibility via plugin parsers and a rules engine
-- Privacy by design for any optional student data
 
-Roadmap and Milestones
-MVP Plan 8–12 Weeks
-- Week 1–2 Ingestion Prototype
-- Parser for one catalog format (HTML or a common vendor) and unit tests
-- Week 3–4 Graph Builder and Core Analysis
-- Graph model, cycle detection, topological layering, longest path calculation
-- Week 5–6 API and Minimal UI
-- REST endpoints for ingestion and analysis; simple React dashboard to visualize graph and issues
-- Week 7–8 Pilot and Export Features
-- CSV/GraphML export, job status endpoints, pilot with one institution or public catalog sample
-Post MVP Enhancements 3–9 Months
-- Parser coverage for multiple catalog vendors and robust PDF extraction
-- Advanced analytics: centrality metrics, redundancy detection, offering frequency simulation
-- Rules engine for institution‑specific policies and overrides
-- SIS integrations for degree audit and optional student planning assistant
-- Enterprise features: SSO, multi‑tenant support, audit logs, SLA guarantees
+---
+
+## 🛠 Recommended Technologies
+- Backend: Python + FastAPI
+- Graph Processing: NetworkX (prototype), Neo4j/TigerGraph (scale)
+- Parsing: Regex + transformer models
+- Frontend: React + Cytoscape.js / D3
+- Queue: Celery + Redis / AWS SQS
+- Database: PostgreSQL + S3
+- Auth: SAML/OAuth
+- Deployment: Docker + Kubernetes
+
+---
+
+## 🧭 Design Principles
+- Idempotent ingestion
+- Human‑readable explanations
+- Extensible parser architecture
+- Privacy by design
+- Raw snapshot retention
+
+---
+
+## 🗺 Roadmap
+
+### ✅ MVP (8–12 Weeks)
+- Catalog ingestion prototype
+- Graph builder + core analysis
+- REST API
+- Minimal dashboard visualization
+- CSV / GraphML exports
+- Pilot with one institution or sample catalog
+
+### 🚀 Post‑MVP (3–9 Months)
+- Multiple vendor parser coverage
+- Advanced analytics (centrality, redundancy detection)
+- Degree audit integrations
+- Rules engine for institution policies
+- Enterprise features (SSO, multi‑tenant)
+
+---
+
+## 🔒 Privacy & Compliance
+If student data is used:
+
+- FERPA alignment
+- Minimal retention
+- Audit logs
+- Institutional ownership of records
+
+---
+
+## 🤝 Contributing
+Pull requests welcome!
+
+---
+
+## 📄 License
+MIT License
