@@ -9,7 +9,7 @@ import argparse
 import json
 from pathlib import Path
 
-def ingest(source: str, out: str = "snapshots/latest.json"):
+def ingest(source: str, out: str = "samples/sample-output.json"):
     # Minimal stub: copy source path info into a snapshot JSON
     snapshot = {"source": source, "status": "stub", "courses": []}
     Path(out).parent.mkdir(parents=True, exist_ok=True)
@@ -20,7 +20,7 @@ def ingest(source: str, out: str = "snapshots/latest.json"):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--source", required=True, help="Path or URL to catalog")
-    p.add_argument("--out", default="snapshots/latest.json", help="Output snapshot path")
+    p.add_argument("--out", default="samples/sample-output.json", help="Output snapshot path")
     args = p.parse_args()
     ingest(args.source, args.out)
 
