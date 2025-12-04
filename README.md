@@ -4,8 +4,7 @@ A market‑relevant SaaS that converts college course catalogs into a graph mode
 
 Table of Contents
 - Project Overview
-- Ingest Usage
-- Features and Specifications
+- Ingest Usage and Quick Start
 - Core Capabilities
 - Data Model Summary
 - API Examples
@@ -33,7 +32,7 @@ Value proposition
 - Reveal hidden prerequisites that inflate credit requirements
 - Identify bottleneck courses and long prerequisite chains that delay graduation
 
-## Ingest Usage 
+## Ingest Usage and Quick Start
 Quick usage notes for the `scripts/ingest.py` ingestion script.
 
 Install dependencies:
@@ -54,12 +53,21 @@ Specify source and output:
 python .\scripts\ingest.py --source samples/sample-catalog.html --out snapshots/latest.json
 ```
 
-Output structure:
+## Output structure:
 
-- JSON array of course objects with keys: `id`, `name`, `prerequisites`.
+### Example input & output
 
-Features and Specifications
-Core Capabilities
+This repo includes a tiny demo catalog and its parsed output:
+
+- Input HTML: [`samples/sample-catalog.html`](samples/sample-catalog.html)
+- Output JSON: [`samples/sample-output.json`](samples/sample-output.json)
+
+Refer to `samples/sample-output.json` for an example of the structured output
+produced by the ingester.
+
+---
+
+## Core Capabilities
 - Catalog Ingestion
 - HTML scraping, PDF extraction, and catalog API connectors
 - Configurable parsers per vendor and fallback NLP for free‑form prerequisite text
@@ -81,7 +89,10 @@ Core Capabilities
 - APIs and Integrations
 - REST API for ingestion, analysis jobs, and issue retrieval
 - Optional connectors for SIS and degree audit systems
-Data Model Summary
+
+---
+
+## Data Model Summary
 - Course: course_id, title, level, description, credits, terms_offered
 - Program: program_id, name, required_courses[], electives[]
 - PrereqExpression: raw_text, expression_tree (AND/OR nodes), resolved_course_ids[]
