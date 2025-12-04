@@ -182,10 +182,5 @@ If student data is used:
 
 ---
 
-## 🤝 Contributing
-Pull requests welcome!
-
----
-
 ## 📄 License
 MIT License
